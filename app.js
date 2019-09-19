@@ -1,5 +1,5 @@
 const electron = require('electron')
-const { app, BrowserWindow, globalShortcut } = require('electron')
+const { app, BrowserWindow, globalShortcut, shell } = require('electron')
 const path = require('path')
 const url = require('url')
 
@@ -18,7 +18,10 @@ function createMainWindow() {
 
     window.setMenu(null)
 
-    window.webContents.openDevTools()
+    window.webContents.on('new-window', function (e, url) {
+        e.preventDefault()
+        shell.openExternal(url)
+    })
 
     window.loadURL(url.format({
         pathname: path.join(__dirname, 'renderer', 'index.html'),

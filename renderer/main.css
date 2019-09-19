@@ -8,10 +8,25 @@ html, body {
     font-size: 20px;
     line-height: 1.5;
     background: white;
+    cursor: default;
+}
+
+a {
+    padding-top: 12px;
+    color: white;
+}
+
+h1 {
+    font-size: 32px;
+}
+
+h2 {
+    font-size: 24px;
 }
 
 .scrimed {
     background: linear-gradient(0deg, #00000000, #00000040);
+    border-radius: 0 0 12px 12px;
 }
 
 #panel {
@@ -41,12 +56,28 @@ html, body {
 }
 
 #hint {
-    height: 48px;
     padding: 12px;
     margin: 0;
     color: white;
     position: absolute;
     right: 0;
+}
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#about {
+    width: min-content;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+    position: relative;
+    margin-top: -50%;
+    left: -50%;
+    color: white;
+    padding: 24px;
 }
 
 input {
@@ -76,6 +107,16 @@ button {
     width: 48px;
     height: 48px;
     background-image: url("../static/ic_reroll.png");
+}
+
+#save {
+    width: 48px;
+    height: 48px;
+    background-image: url("../static/ic_save.png");
+}
+
+#data_url_link {
+    display: none;
 }
 
 canvas {

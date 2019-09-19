@@ -2,13 +2,41 @@
   "name": "irma",
   "version": "1.0.0",
   "description": "Immensely Random Macro bAckground",
+  "homepage": "https://github.com/TheLongRunSmoke/irma",
   "author": "thelongrunsmoke",
   "main": "app.js",
   "dependencies": {},
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build-win": "electron-builder"
   },
   "devDependencies": {
-    "electron": "^6.0.10"
+    "electron": "^6.0.10",
+    "electron-builder": "^21.2.0"
+  },
+  "build": {
+    "appId": "pro.tlrs.irma",
+    "productName": "IRMA",
+    "directories": {
+      "buildResources": "buildRes"
+    },
+    "files": [
+      "!**/node_modules/*",
+      "!npm-shrinkwrap.json",
+      "!.github",
+      "!.vscode",
+      "!LICENSE",
+      "!README*"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
