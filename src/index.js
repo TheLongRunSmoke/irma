@@ -3,9 +3,14 @@
  * 
  * @author thelongrunsmoke
  */
+
+import './main.css'
+
 const StackBlur = require('./blur')
+const Online = require('./online')
 
 const seedInput = document.getElementById('seed_input')
+const rollButton = document.getElementById('roll')
 const canvas = document.getElementById('content')
 const ctx = canvas.getContext('2d')
 
@@ -13,20 +18,21 @@ const ctx = canvas.getContext('2d')
  * Initialize window.
  */
 let init = () => {
-    document.addEventListener("resize", canvasResize)
+    document.addEventListener('resize', canvasResize)
     canvasResize()
+    rollButton.addEventListener('click', rollSeed)
 }
 
 /**
  * Keep canvas size coresponding to viewport.
  */
 let canvasResize = () => {
-    let canvas_w = document.documentElement.clientWidth
-    let canvas_h = document.documentElement.clientHeight
-    canvas.width = canvas_w
-    canvas.height = canvas_h
-    canvas.style.width = canvas_w + "px"
-    canvas.style.height = canvas_h + "px"
+    var width = document.documentElement.clientWidth
+    var height = document.documentElement.clientHeight
+    canvas.width = width
+    canvas.height = height
+    canvas.style.width = width + "px"
+    canvas.style.height = height + "px"
 }
 
 /**

@@ -75,7 +75,7 @@ button {
 #roll {
     width: 48px;
     height: 48px;
-    background-image: url("../static/ic_reroll.png");
+    background-image: url("./ic_reroll.png");
 }
 
 canvas {

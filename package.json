@@ -3,12 +3,24 @@
   "version": "1.0.0",
   "description": "Immensely Random Macro bAckground",
   "author": "thelongrunsmoke",
-  "main": "app.js",
-  "dependencies": {},
+  "email": "thelongrunsmoke@gmail.com",
+  "private": true,
   "scripts": {
-    "start": "electron ."
+    "build": "webpack"
   },
+  "dependencies": {},
+  "license": "GPL-3.0-only",
   "devDependencies": {
-    "electron": "^6.0.10"
-  }
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.2.0",
+    "file-loader": "^4.2.0",
+    "style-loader": "^1.0.0",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9"
+  },
+  "browserslist": "> 0.25%, not dead"
 }
