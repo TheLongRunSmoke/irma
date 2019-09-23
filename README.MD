@@ -1,7 +1,7 @@
 [English](README.md) | [Русский](README.ru.md)
 # Immensely Random Macro bAckground(IRMA)
 
-![logo](https://github.com/TheLongRunSmoke/irma/raw/master/static/logos.png)
+![logo](https://github.com/TheLongRunSmoke/irma/raw/master/static/logo.png)
 
 Generate abstract background for a macro photography.
 
