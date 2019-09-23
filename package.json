@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Immensely Random Macro bAckground",
   "author": "thelongrunsmoke",
+  "homepage": "https://github.com/TheLongRunSmoke/irma",
   "email": "thelongrunsmoke@gmail.com",
   "private": true,
   "scripts": {

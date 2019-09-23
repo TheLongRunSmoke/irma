@@ -7,12 +7,15 @@
 import './main.css'
 
 const StackBlur = require('./blur')
-const Online = require('./online')
 
 const seedInput = document.getElementById('seed_input')
 const rollButton = document.getElementById('roll')
+const aboutButton = document.getElementById('about_button')
+const about = document.getElementById('about')
 const canvas = document.getElementById('content')
 const ctx = canvas.getContext('2d')
+const saveButton = document.getElementById('save')
+const dataUrlLink = document.getElementById('data_url_link')
 
 /**
  * Initialize window.
@@ -21,6 +24,12 @@ let init = () => {
     document.addEventListener('resize', canvasResize)
     canvasResize()
     rollButton.addEventListener('click', rollSeed)
+    saveButton.addEventListener('click', saveBackground)
+    aboutButton.addEventListener('click', (event) => {
+        event.stopPropagation()
+        toggleAbout()
+    })
+    hideAbout()
 }
 
 /**
@@ -38,7 +47,7 @@ let canvasResize = () => {
 /**
  * Restrict input for sidned integer only.
  * 
- * @param {*} textbox affected field
+ * @param {HTMLCanvasElement} textbox affected field
  */
 let setInputFilter = (textbox) => {
     ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach((event) => {
@@ -59,12 +68,11 @@ let setInputFilter = (textbox) => {
 /**
  * Select all in seed field.
  * 
- * @param {*} textbox affected field
+ * @param {HTMLCanvasElement} textbox affected field
  */
 let setAutoSelect = (textbox) => {
     textbox.addEventListener("click", () => seedInput.setSelectionRange(0, seedInput.value.length))
 }
-
 
 /**
  * Generate new seed.
@@ -76,11 +84,46 @@ let rollSeed = () => {
 }
 
 /**
+ * Toggle visiability of About element.
+ */
+let toggleAbout = () => {
+    about.style.display = (about.style.display == 'none') ? '' : 'none'
+}
+
+/**
+ * Hide About element, when click outside.
+ * 
+ * @param {*} seed 
+ */
+let hideAbout = () => {
+    document.onclick = (event) => {
+        if (about.style.display == 'none') return
+        var path = event.composedPath()
+        path.forEach((elm) => {
+            if (elm.id == 'about') return
+        })
+        about.style.display = 'none'
+    }
+}
+
+/**
+ * Offer to save current background as file.
+ * 
+ * @param {Integer} seed 
+ */
+let saveBackground = (seed) => {
+    var dataURL = canvas.toDataURL("image/jpeg")
+    dataUrlLink.href = dataURL
+    dataUrlLink.download = seedInput.value + '.jpg'
+    dataUrlLink.click()
+}
+
+/**
  * Seedable pseudo-random generator. From -1 to 1, included. 
  * Required Math.seed initialized.
  * Values selected to give interesting and well distributed sequence.
  * 
- * @param {*} isSigned signed result or not.
+ * @param {Boolean} isSigned signed result or not.
  */
 Math.seededRandom = (isSigned = false) => {
     Math.seed = (Math.seed * 9301 + 49297) % 233280
@@ -88,6 +131,9 @@ Math.seededRandom = (isSigned = false) => {
     return !isSigned ? Math.abs(rnd) : rnd
 }
 
+/**
+ * Colors.
+ */
 const pallet = ["#ef5350", "#ec407a", "#ab47bc", "#7e57c2", "#5c6bc0", "#42a5f5",
     "#26c6da", "#26a69a", "#66bb6a", "#9ccc65", "#d4e157", "#ffee58",
     "#ffca28", "#8d6e63", "#bdbdbd", "#78909c"]
@@ -116,7 +162,7 @@ let randomColor = () => {
 let showPallet = () => {
     var size = 100
     ctx.font = '20px sans-serif'
-    ctx.textBaseline = 'hanging';
+    ctx.textBaseline = 'hanging'
     for (var i = 0; i < pallet.length; i++) {
         ctx.fillStyle = pallet[i]
         ctx.fillRect(i % 5 * size, Math.floor(i / 5) * size, size, size)
@@ -129,7 +175,7 @@ let showPallet = () => {
  * Create linear gradient for given angle. 
  * From edge to edge always via screen center.
  * 
- * @param {*} angle to vertical in degrees, from 0 to 180.
+ * @param {Float} angle to vertical in degrees, from 0 to 180.
  */
 let generateMainGradient = (angle) => {
     var halfWidth = ctx.canvas.width / 2
@@ -147,6 +193,9 @@ let generateMainGradient = (angle) => {
     )
 }
 
+/**
+ * Create radial gradient in random position.
+ */
 let generateSpotGradient = () => {
     var width = ctx.canvas.width
     var height = ctx.canvas.height
@@ -173,7 +222,7 @@ let generateSpotGradient = () => {
 /**
  * Draw backround by seed.
  * 
- * @param {*} seed 
+ * @param {Integer} seed 
  */
 let generateBackground = (seed) => {
     // Check for inconsistent condition.
