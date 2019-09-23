@@ -21,7 +21,7 @@ const dataUrlLink = document.getElementById('data_url_link')
  * Initialize window.
  */
 let init = () => {
-    document.addEventListener('resize', canvasResize)
+    window.onresize = canvasResize
     canvasResize()
     rollButton.addEventListener('click', rollSeed)
     saveButton.addEventListener('click', saveBackground)
@@ -42,6 +42,8 @@ let canvasResize = () => {
     canvas.height = height
     canvas.style.width = width + "px"
     canvas.style.height = height + "px"
+    // Redraw background after resize.
+    generateBackground(seedInput.value)
 }
 
 /**
